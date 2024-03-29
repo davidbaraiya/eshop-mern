@@ -186,6 +186,11 @@ h6 span {
   height: 2px;
 }
 
+.MuiSlider-thumb {
+  width: 16px !important;
+  height: 16px !important;
+}
+
 /* ///  slick slider custom  /// */
 .slick-dots li button:before {
   border: 1px solid #5f5f5f;

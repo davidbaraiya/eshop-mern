@@ -9,15 +9,7 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import { MobileIcon, SendIcon } from "../assets/icons/icons";
-import {
-  Avatar,
-  Drawer,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Drawer, IconButton, Menu, MenuItem } from "@mui/material";
 
 const settings = [
   {
@@ -140,8 +132,9 @@ const Header = () => {
                       <MenuItem
                         key={option.title}
                         onClick={handleCloseUserMenu}
+                        sx={{ padding: "0" }}
                       >
-                        <Link to={option.path} className="capitalize">
+                        <Link to={option.path} className="w-full px-4 py-2">
                           {option.title}
                         </Link>
                       </MenuItem>

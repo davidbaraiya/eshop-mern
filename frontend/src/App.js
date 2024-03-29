@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import ProductDetails from "./pages/ProductDetails";
 import ForgotPassword from "./pages/ForgotPassword";
 import Cart from "./pages/Cart";
+import ProductList from "./pages/home/ProductList";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           element={<ProductDetails />}
         />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/products" element={<ProductList />} />
 
         {/* auth */}
         <Route path="/auth/login" element={<Login />} />
