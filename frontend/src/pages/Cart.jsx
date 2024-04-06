@@ -6,16 +6,13 @@ import { Add, Close, Remove } from "@mui/icons-material";
 
 const Cart = () => {
   return (
-    <section className="cart-page pb pt bg-gray">
+    <section className="cart-page pb bg-gray">
+      <Breadcrumb currentPage={"Cart"} />
       <div className="container">
-        <Button backButton={true} className="mb-3">
-          Go To Back
-        </Button>
-        <Breadcrumb currentPage={"Cart"} />
-        <Heading>
+        <Heading className="text-center">
           <h2 title="true">
-            Shoping <span> Cart</span>{" "}
-            <b className="text-sm font-normal text-slate-800">(3 items)</b>
+            <span> Cart</span>{" "}
+            {/* <b className="text-sm font-normal text-slate-800">(3 items)</b> */}
           </h2>
         </Heading>
         <div className="grid grid-cols-3 gap-5 items-start">

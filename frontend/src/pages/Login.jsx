@@ -8,7 +8,9 @@ const Login = () => {
     <section className="pt pb">
       <div className="container">
         <Heading className="text-center">
-          <h2 title="true">Log In</h2>
+          <h2 title="true">
+            <span>Log In</span>
+          </h2>
         </Heading>
         <div className="auth-form max-w-[500px] mx-auto">
           <form

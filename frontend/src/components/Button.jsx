@@ -11,23 +11,30 @@ const Button = ({
   to,
   backButton,
   onClick,
+  disabled,
+  type,
 }) => {
   const navigate = useNavigate();
 
   return as === "Link" ? (
     <Link
       to={to}
-      className={`btn ${className} ${
+      className={`btn flex-shrink-0 ${className} ${
         showIcon ? " inline-flex gap-2 items-center " : " "
       }`}
       style={{
         fontSize: fontSize,
         flexDirection: backButton ? "row-reverse" : "",
       }}
+      disabled={disabled}
+      type={type}
     >
       <span className="flex-shrink-0">{children}</span>
       {showIcon && (
-        <span style={{ transform: backButton ? "scale(-1)" : "" }}>
+        <span
+          style={{ transform: backButton ? "scale(-1)" : "" }}
+          className="flex-shrink-0"
+        >
           <RightArrowIcon size={15} />
         </span>
       )}
@@ -35,17 +42,22 @@ const Button = ({
   ) : (
     <button
       onClick={backButton ? () => navigate(-1) : onClick}
-      className={`btn ${className} ${
+      className={`btn flex-shrink-0 ${className} ${
         showIcon ? " inline-flex gap-2 items-center" : ""
       }`}
       style={{
         fontSize: fontSize,
         flexDirection: backButton ? "row-reverse" : "",
       }}
+      disabled={disabled}
+      type={type}
     >
       <span className="flex-shrink-0">{children}</span>
       {showIcon && (
-        <span style={{ transform: backButton ? "scale(-1)" : "" }}>
+        <span
+          style={{ transform: backButton ? "scale(-1)" : "" }}
+          className="flex-shrink-0"
+        >
           <RightArrowIcon size={15} />
         </span>
       )}

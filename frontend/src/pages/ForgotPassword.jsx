@@ -8,7 +8,7 @@ const ForgotPassword = () => {
     <section className="pt pb">
       <div className="container">
         <Heading className="text-center">
-          <h2 title="true">Forgot Password</h2>
+          <h2 title="true"><span>Forgot Password</span></h2>
         </Heading>
         <div className="auth-form max-w-[500px] mx-auto">
           <form

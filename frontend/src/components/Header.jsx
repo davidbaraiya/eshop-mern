@@ -9,7 +9,7 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import { MobileIcon, SendIcon } from "../assets/icons/icons";
-import { Drawer, IconButton, Menu, MenuItem } from "@mui/material";
+import { Avatar, Drawer, IconButton, Menu, MenuItem } from "@mui/material";
 
 const settings = [
   {
@@ -22,23 +22,13 @@ const settings = [
   },
 ];
 
-const Header = () => {
+const Header = ({ user }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -46,6 +36,8 @@ const Header = () => {
   const toggleDrawer = (newOpen) => () => {
     setMobileMenuOpen(newOpen);
   };
+
+  console.log(user?.isLoggedIn);
 
   return (
     <>
@@ -106,11 +98,11 @@ const Header = () => {
                 </li>
                 <li>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <AccountCircle />
-                    {/* <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/2.jpg"
-                      /> */}
+                    {user?.isLoggedIn ? (
+                      <Avatar alt="avatar" src={user?.user?.avatar.url} />
+                    ) : (
+                      <AccountCircle />
+                    )}
                   </IconButton>
                   <Menu
                     sx={{ mt: "45px" }}
@@ -127,6 +119,7 @@ const Header = () => {
                     }}
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
+                    className="capitalize"
                   >
                     {settings.map((option) => (
                       <MenuItem
@@ -134,11 +127,17 @@ const Header = () => {
                         onClick={handleCloseUserMenu}
                         sx={{ padding: "0" }}
                       >
-                        <Link to={option.path} className="w-full px-4 py-2">
+                        <Link to={option.path} className=" w-full px-4 py-2">
                           {option.title}
                         </Link>
                       </MenuItem>
                     ))}
+                    <MenuItem
+                      onClick={handleCloseUserMenu}
+                      sx={{ padding: "0" }}
+                    >
+                      <span className=" w-full px-4 py-2">LogOut</span>
+                    </MenuItem>
                   </Menu>
                 </li>
 

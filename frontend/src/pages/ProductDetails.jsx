@@ -1,138 +1,160 @@
-import React, { useEffect, useRef, useState } from "react";
-import Slider from "react-slick";
-import img1 from "../assets/images/banner.png";
-import img2 from "../assets/images/banner-2.png";
-import { RightArrowIcon } from "../assets/icons/icons";
+import React, { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
 import { Rating } from "@mui/material";
-import { Star, Add, Remove } from '@mui/icons-material';
+import { Star, Add, Remove } from "@mui/icons-material";
 import Breadcrumb from "../components/Breadcrumb";
 import Section2 from "./home/Section2";
-
-
-function NextArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <RightArrowIcon color="#fff" />
-    </div>
-  );
-}
-
-function PrevArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <RightArrowIcon color="#fff" />
-    </div>
-  );
-}
+import ReviewModal from "../components/ReviewModal";
+import ReviewCard from "../components/ReviewCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProduct } from "../redux/actions/productAction";
+import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
+import toast from "react-hot-toast";
+import ProductCarousel from "../components/ProductCarousel";
 
 const ProductDetails = () => {
-  const [nav1, setNav1] = useState(null);
-  const [nav2, setNav2] = useState(null);
-  let sliderRef1 = useRef(null);
-  let sliderRef2 = useRef(null);
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const { singleProduct, loading, error } = useSelector(
+    (state) => state.singleProduct
+  );
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   useEffect(() => {
-    setNav1(sliderRef1);
-    setNav2(sliderRef2);
-    window.scrollTo(0, 0)
-  }, []);
+    window.scrollTo(0, 0);
+    dispatch(getSingleProduct(productId));
+  }, [dispatch, productId]);
+
+  const {
+    ratings,
+    name,
+    description,
+    price,
+    rating,
+    images,
+    category,
+    stock,
+    numOfReviews,
+    reviews,
+  } = singleProduct || {};
+
+  if (loading) {
+    return <Loader />;
+  }
+  if (error) {
+    toast.error("Error :", error);
+  }
 
   return (
     <>
-      <section className="product-detail bg-theme pt">
+      <section className="product-detail-section bg-theme">
+        <Breadcrumb color="#fff" currentPage="Product Detail" />
         <div className="container">
-          <Breadcrumb color="#fff" currentPage="Product Detail" />
           <div className="grid grid-cols-2 gap-5">
             <div className="bg-white relative text-black p-5 before:bg-white before:absolute before:inset-y-0 before:-left-[50vw] before:w-[50vw]">
-              <div className="slider-container">
-                <Slider
-                  asNavFor={nav2}
-                  ref={(slider) => (sliderRef1 = slider)}
-                  nextArrow=<NextArrow />
-                  prevArrow=<PrevArrow />
-                >
-                  <div className="img-wrapper">
-                    <img src={img1} alt="product img" />
-                  </div>
-                  <div className="img-wrapper">
-                    <img src={img2} alt="product img" />
-                  </div>
-                  <div className="img-wrapper">
-                    <img src={img1} alt="product img" />
-                  </div>
-                  <div className="img-wrapper">
-                    <img src={img2} alt="product img" />
-                  </div>
-                </Slider>
-                <Slider
-                  asNavFor={nav1}
-                  ref={(slider) => (sliderRef2 = slider)}
-                  slidesToShow={4}
-                  swipeToSlide={true}
-                  focusOnSelect={true}
-                  arrows={false}
-                >
-                  <div className="img-wrapper">
-                    <img src={img1} alt="product img" />
-                  </div>
-                  <div className="img-wrapper">
-                    <img src={img2} alt="product img" />
-                  </div>
-                  <div className="img-wrapper">
-                    <img src={img1} alt="product img" />
-                  </div>
-                  <div className="img-wrapper">
-                    <img src={img2} alt="product img" />
-                  </div>
-                </Slider>
-              </div>
+              <ProductCarousel {...{ images, name }} />
             </div>
             <div className=" p-5">
               <div className="product-details text-white">
-                <Button className="btn-white mb-3 text-xs" backButton={true}>Go To Back</Button>
-                <Heading>
-                  <h3>Knee Length Dress in Tropical Leaves Cotton</h3>
-                </Heading>
+                <h3 className="capitalize text-2xl mb-4">{name}</h3>
                 <div className="rating flex items-center gap-2 mb-2">
                   <Rating
                     name="rating"
-                    defaultValue={4}
+                    defaultValue={rating ?? 0}
                     readOnly
                     sx={{ width: "100px" }}
-                    emptyIcon={<Star style={{ opacity: 0.55, color: "#fff" }} />}
+                    emptyIcon={
+                      <Star style={{ opacity: 0.55, color: "#fff" }} />
+                    }
                   />
                   <span style={{ lineHeight: 1 }} className="text-xs">
-                    (51)
+                    ({numOfReviews} reviews)
                   </span>
                 </div>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.
-                </p>
-
+                <p>{description}</p>
+                <div className="mt-4 flex gap-3 items-center">
+                  <label htmlFor="status" className="block">
+                    Status:
+                  </label>
+                  {stock >= 1 ? (
+                    <div id="status" className="text-green-400 ">
+                      In Stock
+                    </div>
+                  ) : (
+                    <div id="status" className="text-red ">
+                      Out of Stock
+                    </div>
+                  )}
+                </div>
                 <div className="quantity mt-4">
-                  <label htmlFor="quantity" className="block">Quantity:</label>
+                  <label htmlFor="quantity" className="block">
+                    Quantity:
+                  </label>
                   <div className="inline-flex mt-2 min-w-fit">
-                    <Button showIcon={false} className="btn-white"> <Remove fontSize="md" /></Button>
-                    <div className="flex items-center px-3 border-t border-b">5</div>
-                    <Button showIcon={false} className="btn-white"><Add fontSize="md" /></Button>
+                    <Button showIcon={false} className="btn-white">
+                      <Remove fontSize="md" />
+                    </Button>
+                    <div className="flex items-center px-3 border-t border-b">
+                      5
+                    </div>
+                    <Button showIcon={false} className="btn-white">
+                      <Add fontSize="md" />
+                    </Button>
                   </div>
                 </div>
-                <div className="font-bold  flex-shrink-0 w-full my-4 text-xl">&#8377; 450</div>
-                <Button className="btn-white w-full">Add To Cart</Button>
+                <div className="font-bold  flex-shrink-0 w-full my-4 text-xl">
+                  &#8377; {price}
+                </div>
+                <div className="flex gap-5 w-full">
+                  <Button
+                    className="btn-white flex-1"
+                    showIcon={false}
+                    onClick={handleOpenModal}
+                  >
+                    Submit Review
+                  </Button>
+                  <Button
+                    className="btn-white flex-1"
+                    disabled={stock < 1 ? true : false}
+                  >
+                    Add To Cart
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="pt pb">
+      <ReviewModal {...{ openModal, handleCloseModal, productId }} />
+      <section className="pt pb bg-gray mt-[80px]">
         <div className="container">
-          <Section2 />
+          <Heading className="text-center">
+            <h2 title="true">
+              <span>Reviews</span>
+            </h2>
+          </Heading>
+          <div className="grid grid-cols-3 gap-3">
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+          </div>
         </div>
       </section>
+      <Section2 />
     </>
   );
 };
