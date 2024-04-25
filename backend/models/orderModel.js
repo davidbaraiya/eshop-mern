@@ -20,11 +20,11 @@ const orderSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    pinCode: {
+    pincode: {
       type: Number,
       required: true,
     },
-    phoneNo: {
+    phone: {
       type: Number,
       required: true,
     },
@@ -47,7 +47,7 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      product: {
+      id: {
         type: mongoose.Schema.ObjectId,
         ref: "Product",
         required: true,
@@ -96,7 +96,7 @@ const orderSchema = new mongoose.Schema({
   orderStatus: {
     type: String,
     required: true,
-    default: "Processing",
+    default: "processing",
   },
   deliveredAt: Date,
   createdAt: {

@@ -4,7 +4,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import Button from "../components/Button";
 import Loader from "../components/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../redux/actions/productAction";
+import { clearErrors, getAllProducts } from "../redux/actions/productAction";
 import { ProductCard } from "../components";
 import Pagination from "../components/Pagination";
 import toast from "react-hot-toast";
@@ -69,6 +69,7 @@ const SearchPage = () => {
 
   if (error) {
     toast.error("Error :", error);
+    dispatch(clearErrors());
   }
 
   const totalProducts = Math.ceil(productsCount / resultPerPage);

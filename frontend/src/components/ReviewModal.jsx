@@ -47,7 +47,7 @@ const ReviewModal = ({ openModal, handleCloseModal, productId }) => {
           </DialogContent>
           <div
             style={{ padding: "0 20px 20px 20px" }}
-            className="flex gap-2 ml-auto"
+            className="flex gap-2 justify-end"
           >
             <Button onClick={handleCloseModal} showIcon={false}>
               Cancel

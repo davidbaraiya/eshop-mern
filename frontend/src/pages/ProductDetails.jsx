@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
 import { Rating } from "@mui/material";
-import { Star, Add, Remove } from "@mui/icons-material";
+import { Star } from "@mui/icons-material";
 import Breadcrumb from "../components/Breadcrumb";
 import Section2 from "./home/Section2";
 import ReviewModal from "../components/ReviewModal";
@@ -13,6 +13,8 @@ import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import ProductCarousel from "../components/ProductCarousel";
+import { addToCartAction } from "../redux/actions/cartAction";
+import Quantity from "../components/Quantity";
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -20,8 +22,14 @@ const ProductDetails = () => {
   const { singleProduct, loading, error } = useSelector(
     (state) => state.singleProduct
   );
+  const {
+    success,
+    loading: reviewLoading,
+    error: reviewError,
+  } = useSelector((state) => state.productReviews);
 
   const [openModal, setOpenModal] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -49,11 +57,18 @@ const ProductDetails = () => {
     reviews,
   } = singleProduct || {};
 
-  if (loading) {
+  const handleAddToCart = () => {
+    dispatch(addToCartAction(productId, quantity));
+  };
+
+  if (loading || reviewLoading) {
     return <Loader />;
   }
-  if (error) {
+  if (error || reviewError) {
     toast.error("Error :", error);
+  }
+  if (success) {
+    return toast.success("review added");
   }
 
   return (
@@ -70,10 +85,10 @@ const ProductDetails = () => {
                 <h3 className="capitalize text-2xl mb-4">{name}</h3>
                 <div className="rating flex items-center gap-2 mb-2">
                   <Rating
-                    name="rating"
-                    defaultValue={rating ?? 0}
+                    name="half-rating"
+                    defaultValue={ratings ?? 0}
                     readOnly
-                    sx={{ width: "100px" }}
+                    precision={0.5}
                     emptyIcon={
                       <Star style={{ opacity: 0.55, color: "#fff" }} />
                     }
@@ -101,17 +116,7 @@ const ProductDetails = () => {
                   <label htmlFor="quantity" className="block">
                     Quantity:
                   </label>
-                  <div className="inline-flex mt-2 min-w-fit">
-                    <Button showIcon={false} className="btn-white">
-                      <Remove fontSize="md" />
-                    </Button>
-                    <div className="flex items-center px-3 border-t border-b">
-                      5
-                    </div>
-                    <Button showIcon={false} className="btn-white">
-                      <Add fontSize="md" />
-                    </Button>
-                  </div>
+                  <Quantity {...{ quantity, setQuantity, stock }} />
                 </div>
                 <div className="font-bold  flex-shrink-0 w-full my-4 text-xl">
                   &#8377; {price}
@@ -125,6 +130,7 @@ const ProductDetails = () => {
                     Submit Review
                   </Button>
                   <Button
+                    onClick={handleAddToCart}
                     className="btn-white flex-1"
                     disabled={stock < 1 ? true : false}
                   >
@@ -144,14 +150,15 @@ const ProductDetails = () => {
               <span>Reviews</span>
             </h2>
           </Heading>
-          <div className="grid grid-cols-3 gap-3">
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-          </div>
+          {reviews?.length > 0 ? (
+            <div className="grid grid-cols-3 gap-3">
+              {reviews.map((review) => (
+                <ReviewCard review={review} key={review._id} />
+              ))}
+            </div>
+          ) : (
+            <div className="my-5 text-lg text-center">No Reviews Yet</div>
+          )}
         </div>
       </section>
       <Section2 />

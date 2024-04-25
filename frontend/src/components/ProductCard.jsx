@@ -1,4 +1,6 @@
 import Rating from "@mui/material/Rating";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
@@ -21,10 +23,10 @@ const ProductCard = ({ product }) => {
         </h5>
         <div className="rating flex items-center gap-2 my-2">
           <Rating
-            name="rating"
+            name="half-rating"
             defaultValue={product.ratings}
+            precision={0.5}
             readOnly
-            sx={{ width: "100px" }}
           />
           <span style={{ lineHeight: 1 }} className="text-xs">
             ({product?.numOfReviews})

@@ -1,9 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import { Button } from "../components";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { clearErrors, loginAction } from "../redux/actions/userAction";
+import { VisibilityOutlined, VisibilityOffOutlined } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import Loader from "../components/Loader";
 
-const Login = () => {
+const Login = ({ user }) => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [authData, setAuthData] = useState({
+    email: "",
+    password: "",
+  });
+  const [passwordVisibled, setPasswordVisibled] = useState(false);
+
+  const redirect = location.search ? "/" + location.search.split("=")[1] : "/";
+
+  useEffect(() => {
+    if (user?.isLoggedIn) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, user]);
+
+  if (user.loading) {
+    return <Loader />;
+  }
+
+  if (user.error) {
+    toast.error(user.error);
+    dispatch(clearErrors());
+  }
+
+  // handle input change
+  const handleAuthInputChange = (e) => {
+    const { name, value } = e.target;
+    setAuthData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // submit form
+  const submitAuthForm = (e) => {
+    e.preventDefault();
+    const { email, password } = authData;
+    if (email && password) {
+      dispatch(loginAction(authData));
+    } else {
+      toast.error("please enter email and password");
+    }
+  };
+
   return (
     <section className="pt pb">
       <div className="container">
@@ -14,33 +62,58 @@ const Login = () => {
         </Heading>
         <div className="auth-form max-w-[500px] mx-auto">
           <form
-            action=""
+            onSubmit={submitAuthForm}
             className="bg-white border border-slate-300 shadow-md py-7 px-5"
           >
             <div className="mb-3">
               <label htmlFor="email" className="mr-2 text-theme">
                 Email:{" "}
               </label>
-              <input type="email" name="email" className="form-control" />
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                value={authData.email}
+                onChange={handleAuthInputChange}
+              />
             </div>
-
             <div className="mb-3">
               <div className="flex justify-between items-center">
                 <label htmlFor="password" className="mr-2 text-theme">
-                  Password:{" "}
+                  Password:
                 </label>
                 <Link
                   to="/auth/forgot-password"
-                  className="text-red hover:underline"
+                  className="text-slate-800 text-sm underline"
                 >
-                  Forgot Password?
+                  Forgot Password
                 </Link>
               </div>
-              <input type="password" name="password" className="form-control" />
+              <div className="relative">
+                <input
+                  type={passwordVisibled ? "text" : "password"}
+                  name="password"
+                  className="form-control"
+                  value={authData.password}
+                  onChange={handleAuthInputChange}
+                />
+                <span
+                  className="absolute inset-y-0 right-2 flex items-center mt-2 cursor-pointer"
+                  onClick={() => setPasswordVisibled((prev) => !prev)}
+                >
+                  {passwordVisibled ? (
+                    <VisibilityOffOutlined sx={{ color: "gray" }} />
+                  ) : (
+                    <VisibilityOutlined sx={{ color: "gray" }} />
+                  )}
+                </span>
+              </div>
             </div>
 
             <div className="text-center ">
-              <Button className="ml-auto w-full btn-fill">LogIn</Button>
+              <Button className="ml-auto w-full btn-fill" type="submit">
+                LogIn
+              </Button>
             </div>
             <hr className="my-5 border-darkGray w-1/2 mx-auto" />
             <p className="text-center">

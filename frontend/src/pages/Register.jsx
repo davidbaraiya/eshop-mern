@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import { Button } from "../components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import dummyAvatar from "../assets/images/dummy-user.png";
 import { VisibilityOutlined, VisibilityOffOutlined } from "@mui/icons-material";
 import { registerAction } from "../redux/actions/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Register = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [authData, setAuthData] = useState({
     name: "",
     email: "",
     password: "",
-    avatar: dummyAvatar,
+    avatar: "",
   });
   const [passwordVisibled, setPasswordVisibled] = useState(false);
+
+  useEffect(() => {
+    if (user?.isLoggedIn) {
+      navigate("/");
+    }
+  }, [navigate, user?.isLoggedIn]);
 
   // handle input change
   const handleAuthInputChange = (e) => {
@@ -37,8 +46,12 @@ const Register = () => {
     dispatch(registerAction(authData));
   };
 
+  // if (user.error) {
+  //   toast.error(user.error);
+  // }
+
   return (
-    <section className="pb">
+    <section className="pb pt">
       <div className="container">
         <Heading className="text-center">
           <h2 title="true">
@@ -104,19 +117,20 @@ const Register = () => {
               <label htmlFor="profile" className="mr-2 text-theme">
                 Profile:
               </label>
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center justify-between profile-div">
                 <input
                   type="file"
                   name="avatar"
-                  className="form-control"
+                  // className="form-control"
                   accept="image/*"
                   onChange={handleAuthInputChange}
                 />
                 <img
-                  src={authData.avatar}
+                  src={authData.avatar !== "" ? authData.avatar : dummyAvatar}
                   alt="avatar"
-                  width={45}
-                  height={45}
+                  width={"45px"}
+                  height={"45px"}
+                  className="rounded-full"
                 />
               </div>
             </div>

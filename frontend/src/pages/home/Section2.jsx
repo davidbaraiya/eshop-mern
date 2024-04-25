@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Heading from "../../components/Heading";
 import Loader from "../../components/Loader";
 import toast from "react-hot-toast";
+import { clearErrors } from "../../redux/actions/userAction";
 
 const Section2 = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Section2 = () => {
     console.log("Error:", error);
     const errorMessage = error || "An error occurred";
     toast.error(errorMessage);
-    return null;
+    dispatch(clearErrors());
   }
 
   return (

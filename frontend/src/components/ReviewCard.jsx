@@ -1,7 +1,7 @@
 import { Rating } from "@mui/material";
 import dummyUser from "../assets/images/dummy-user.png";
 
-const ReviewCard = () => {
+const ReviewCard = ({ review }) => {
   return (
     <div className="review-card border-theme border py-5 px-3 bg-white">
       <div className="flex gap-4">
@@ -9,14 +9,15 @@ const ReviewCard = () => {
           <img src={dummyUser} alt="user profile" className="w-full h-full" />
         </div>
         <div className="">
-          <h6 className="capitalize"> david baraiya </h6>
+          <h6 className="capitalize">{review.name} </h6>
           <Rating
             name="rating"
-            defaultValue={3}
+            defaultValue={review.rating}
+            precision={0.5}
             readOnly
-            sx={{ width: "100px" }}
+            size="small"
           />
-          <p className="text-slate-500">Lorem ipsum busdam, quos officiis.</p>
+          <p className="text-slate-500">{review.comment}</p>
         </div>
       </div>
     </div>

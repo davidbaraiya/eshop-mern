@@ -12,3 +12,43 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 export const USER_LOADING = "USER_LOADING";
 export const USER_SUCCESS = "USER_SUCCESS";
 export const USER_ERROR = "USER_ERROR";
+
+/// me user
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_ERROR = "LOGOUT_ERROR";
+
+/// update user info
+export const UPDATE_PROFILE_LOADING = "UPDATE_PROFILE_LOADING";
+export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
+export const UPDATE_PROFILE_ERROR = "UPDATE_PROFILE_ERROR";
+
+/// change Password
+export const CHANGE_PASSWORD_LOADING = "CHANGE_PASSWORD_LOADING";
+export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
+export const CHANGE_PASSWORD_ERROR = "CHANGE_PASSWORD_ERROR";
+
+/// clear errors
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+////////  admin  ///////////
+/// get all users
+export const GET_ALL_USERS_LOADING = "GET_ALL_USERS_LOADING";
+export const GET_ALL_USERS_SUCCESS = "GET_ALL_USERS_SUCCESS";
+export const GET_ALL_USERS_ERROR = "GET_ALL_USERS_ERROR";
+
+/// get single user
+export const SINGLE_USER_LOADING = "SINGLE_USER_LOADING";
+export const SINGLE_USER_SUCCESS = "SINGLE_USER_SUCCESS";
+export const SINGLE_USER_ERROR = "SINGLE_USER_ERROR";
+
+/// update user
+export const UPDATE_USER_LOADING = "UPDATE_USER_LOADING";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
+export const UPDATE_USER_RESET = "UPDATE_USER_RESET";
+
+/// delete users
+export const DELETE_USERS_LOADING = "DELETE_USERS_LOADING";
+export const DELETE_USERS_SUCCESS = "DELETE_USERS_SUCCESS";
+export const DELETE_USERS_ERROR = "DELETE_USERS_ERROR";
+export const DELETE_USERS_RESET = "DELETE_USERS_RESET";

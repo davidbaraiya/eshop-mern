@@ -66,8 +66,12 @@ h6 {
 
 svg,
 img {
-  max-width: 100%;
   display: block;
+}
+
+button svg,
+.btn svg {
+  max-width: 100%;
 }
 
 a {
@@ -202,6 +206,35 @@ button:disabled {
   width: 16px !important;
   height: 16px !important;
 }
+
+
+/* input file  */
+.profile-div {
+  @apply border py-2 px-3 w-full mt-2 border-darkGray
+}
+
+[type="file"] {
+  color: #878787;
+}
+
+[type="file"]::-webkit-file-upload-button {
+  background: var(--theme-color);
+  border: 1px solid var(--theme-color);
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  padding: 8px 15px;
+  transition: all 0.3s ease;
+}
+
+[type="file"]::-webkit-file-upload-button:hover {
+  background: #fff;
+  border-color: 1px solid #535353;
+  color: #000;
+}
+
 
 /* ///  slick slider custom  /// */
 .slick-dots li button:before {
@@ -348,6 +381,87 @@ button:disabled {
 .product-detail-section .product-thumb-slider .slick-slide.slick-current .img-wrapper {
   background-color: var(--dark-gray-color);
 }
+
+.Mui-completed {
+  color: rgba(7, 124, 7, 0.671) !important;
+}
+
+.Mui-active {
+  color: rgb(204, 187, 30) !important;
+}
+
+
+/* /// ////////////  my orders ////////////// */
+.myOrdersPage {
+  width: 100vw;
+  max-width: 100%;
+  padding: 0 7vmax;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#myOrdersHeading {
+  text-align: center;
+  padding: 0.5vmax;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  transition: all 0.5s;
+  background-color: rgb(44, 44, 44);
+}
+
+
+.myOrdersTable div:focus,
+.myOrdersTable div {
+  border: none !important;
+  outline: none !important;
+}
+
+.MuiDataGrid-columnHeader {
+  background-color: var(--theme-color);
+  padding: 1vmax !important;
+}
+
+.MuiDataGrid-columnHeader svg {
+  color: var(--gray-color);
+}
+
+.MuiDataGrid-columnHeader div {
+  color: rgb(255, 255, 255);
+}
+
+.MuiDataGrid-iconSeparator {
+  display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  .myOrdersPage {
+    padding: 0;
+    height: 93vh;
+  }
+
+  #myOrdersHeading {
+    padding: 4vw;
+  }
+
+
+  .MuiDataGrid-columnHeader {
+    padding: 20px !important;
+  }
+
+}
+
+
+
+
+
+
+
+
+
 
 /* /////////////////  responsive css  ///////////////// */
 @media screen and (max-width:991px) {

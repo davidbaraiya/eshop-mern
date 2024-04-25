@@ -115,7 +115,7 @@ const ProductList = () => {
                     value={i + 1}
                     onChange={(e) => setRating(e.target.value)}
                   />
-                  <label htmlFor={rating + i}>
+                  <label htmlFor={rating + i} className="w-full">
                     <Rating
                       name="rating"
                       defaultValue={i + 1}

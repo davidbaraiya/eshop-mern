@@ -15,6 +15,8 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     totalPrice,
   } = req.body;
 
+  console.log(req.body);
+
   const order = await Order.create({
     shippingInfo,
     orderItems,
@@ -85,33 +87,51 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new errorHandler("Order not found with this Id", 404));
   }
 
-  if (order.orderStatus === "Delivered") {
+  if (order.orderStatus === "delivered") {
     return next(new errorHandler("You have already delivered this order", 400));
   }
 
-  if (req.body.status === "Shipped") {
-    order.orderItems.forEach(async (o) => {
-      await updateStock(o.product, o.quantity);
-    });
+  if (req.body.status === "shipped") {
+    try {
+      await Promise.all(
+        order.orderItems.map(async (o) => {
+          await updateStock(o.id, o.quantity);
+        })
+      );
+    } catch (error) {
+      return next(new errorHandler("Error updating stock", 500));
+    }
   }
   order.orderStatus = req.body.status;
 
-  if (req.body.status === "Delivered") {
+  if (req.body.status === "delivered") {
     order.deliveredAt = Date.now();
   }
 
-  await order.save({ validateBeforeSave: false });
-  res.status(200).json({
-    success: true,
-  });
+  try {
+    await order.save({ validateBeforeSave: false });
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    return next(new errorHandler("Error saving order", 500));
+  }
 });
 
 async function updateStock(id, quantity) {
-  const product = await Product.findById(id);
+  try {
+    const product = await Product.findById(id);
 
-  product.Stock -= quantity;
+    if (!product) {
+      throw new Error("Product not found");
+    }
 
-  await product.save({ validateBeforeSave: false });
+    product.stock -= quantity;
+
+    await product.save({ validateBeforeSave: false });
+  } catch (error) {
+    throw new Error("Error updating stock");
+  }
 }
 
 // delete Order -- Admin
