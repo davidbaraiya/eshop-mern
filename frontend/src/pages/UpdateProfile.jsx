@@ -59,7 +59,7 @@ const UpdateProfile = ({ openModal, handleCloseModal }) => {
         <DialogTitle>Update Profile</DialogTitle>
         <form
           onSubmit={submitAuthForm}
-          className="bg-white border border-slate-300 shadow-md py-7 px-5"
+          className="bg-white border border-slate-300 shadow-md py-7 px-2 md:px-5"
         >
           <div className="mb-3">
             <label htmlFor="name" className="mr-2 text-theme">

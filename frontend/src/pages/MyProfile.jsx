@@ -51,30 +51,29 @@ const MyProfile = () => {
               </IconButton>
             </div>
 
-            <div className="flex items-center  py-16 px-6 gap-20 max-w-[75%] mx-auto">
-              <div className="img-wrapper w-[150px] h-[150px] border border-darkGray  rounded-full overflow-hidden">
+            <div className="md:flex items-center  py-16 px-6 gap-20 md:max-w-[75%] mx-auto">
+              <div className="mb-5 md:mb-0 img-wrapper w-[150px] h-[150px] border border-darkGray  rounded-full overflow-hidden shrink-0">
                 <img
                   src={user?.user?.avatar.url ?? dummyUser}
                   alt="profile"
                   className="object-contain w-full h-full"
                 />
               </div>
-
               <div className="content capitalize">
                 <div className="mb-5 flex items-center text-slate-600">
-                  <label htmlFor="name" className="mr-3 text-xl">
+                  <label htmlFor="name" className="mr-3 md:text-xl">
                     Name:
                   </label>
                   <span>{user?.user?.name}</span>
                 </div>
                 <div className="mb-5 flex items-center text-slate-600">
-                  <label htmlFor="name" className="mr-3 text-xl">
+                  <label htmlFor="name" className="mr-3 md:text-xl">
                     Email:
                   </label>
                   <span className="lowercase">{user?.user?.email}</span>
                 </div>
                 <div className="mb-5 flex items-center text-slate-600">
-                  <label htmlFor="name" className="mr-3 text-xl">
+                  <label htmlFor="name" className="mr-3 md:text-xl">
                     Join On:
                   </label>
                   <span>{formattedDate}</span>

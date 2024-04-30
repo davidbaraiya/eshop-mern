@@ -53,21 +53,21 @@ const Cart = () => {
           </h2>
         </Heading>
         {cart?.length > 0 ? (
-          <div className="grid grid-cols-3 gap-5 items-start">
+          <div className=" md:grid md:grid-cols-3 gap-5 items-start">
             <div className="col-span-2 gap-5 bg-white border border-gray shadow-md py-5 px-4">
               {cart?.map(({ id, name, image, price, stock, quantity }) => (
                 <div
                   key={id}
-                  className="flex items-start gap-3 mt-4 border-b border-darkGray pb-4 "
+                  className="flex justify-between md:justify-normal items-start gap-3 mt-4 border-b border-darkGray pb-4 "
                 >
-                  <div className="img-wrapper max-w-[140px] w-full h-full bg-gray relative pt-[100px]">
+                  <div className="img-wrapper max-w-[80px] md:max-w-[140px] w-full h-full bg-gray relative pt-[100px] shrink-0">
                     <img
                       src={image}
                       alt={name}
                       className="absolute inset-0 object-contain w-full h-full"
                     />
                   </div>
-                  <div className="right-side flex items-start justify-between gap-5 w-full">
+                  <div className="right-side md:flex items-start justify-between gap-5 w-full">
                     <div>
                       <h5>{name}</h5>
                       <span className="text-slate-600 ">Color: red</span>
@@ -99,7 +99,7 @@ const Cart = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex gap-5 items-center">
+                    <div className="flex gap-5 items-center mt-3 md:mt-0 justify-end">
                       <div className="font-bold  flex-shrink-0 ">
                         &#8377; {Math.round(price * quantity)}
                       </div>

@@ -76,11 +76,11 @@ const ProductDetails = () => {
       <section className="product-detail-section bg-theme">
         <Breadcrumb color="#fff" currentPage="Product Detail" />
         <div className="container">
-          <div className="grid grid-cols-2 gap-5">
-            <div className="bg-white relative text-black p-5 before:bg-white before:absolute before:inset-y-0 before:-left-[50vw] before:w-[50vw]">
+          <div className="md:grid md:grid-cols-2 gap-5">
+            <div className="bg-white relative text-black p-3 ms:p-5 before:bg-white before:absolute before:inset-y-0 before:-left-[50vw] before:w-[50vw]">
               <ProductCarousel {...{ images, name }} />
             </div>
-            <div className=" p-5">
+            <div className="px-2 py-4 md:p-5">
               <div className="product-details text-white">
                 <h3 className="capitalize text-2xl mb-4">{name}</h3>
                 <div className="rating flex items-center gap-2 mb-2">
@@ -143,7 +143,7 @@ const ProductDetails = () => {
         </div>
       </section>
       <ReviewModal {...{ openModal, handleCloseModal, productId }} />
-      <section className="pt pb bg-gray mt-[80px]">
+      <section className="pt pb bg-gray mt-[40px] md:mt-[80px]">
         <div className="container">
           <Heading className="text-center">
             <h2 title="true">
@@ -151,7 +151,7 @@ const ProductDetails = () => {
             </h2>
           </Heading>
           {reviews?.length > 0 ? (
-            <div className="grid grid-cols-3 gap-3">
+            <div className="sm:grid sm:grid-cols-2 md:grid-cols-3 gap-3">
               {reviews.map((review) => (
                 <ReviewCard review={review} key={review._id} />
               ))}

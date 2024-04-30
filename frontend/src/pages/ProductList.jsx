@@ -68,8 +68,8 @@ const ProductList = () => {
             <span>Products</span>
           </h2>
         </Heading>
-        <div className="flex gap-5 items-start w-full">
-          <div className="bg-white border border-gray max-w-[280px] w-full shadow-md py-5 px-4">
+        <div className="block gap-5 items-start w-full md:flex">
+          <div className=" bg-white border border-gray max-w-[100%]  w-full shadow-md py-5 px-4 md:max-w-[280px]">
             <h4>Filter</h4>
             <hr className="my-3 border-slate-400" />
             {productCategories?.length > 0 && (
@@ -157,7 +157,7 @@ const ProductList = () => {
             </div>
             {allProducts?.length > 0 && (
               <div>
-                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-5 gap-x-3">
+                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-y-5 gap-x-3">
                   {allProducts?.map((product) => (
                     <ProductCard key={product?._id} product={product} />
                   ))}

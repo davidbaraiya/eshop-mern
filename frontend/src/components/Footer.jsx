@@ -1,4 +1,5 @@
 import { logoWhite } from "../utils/constent";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -17,17 +18,14 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="https://eShop.com/" className="hover:underline">
+                  <Link to="/" className="hover:underline">
                     eShop
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://tailwindcss.com/"
-                    className="hover:underline"
-                  >
-                    Tailwind CSS
-                  </a>
+                  <Link to="/products" className="hover:underline">
+                    Products
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -37,18 +35,12 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a
-                    href="https://github.com/themesberg/eShop"
-                    className="hover:underline "
-                  >
+                  <a href="#/" className="hover:underline ">
                     Github
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="https://discord.gg/4eeurUVvTy"
-                    className="hover:underline"
-                  >
+                  <a href="#/" className="hover:underline">
                     Discord
                   </a>
                 </li>
@@ -60,12 +52,12 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <a href="#/" className="hover:underline">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#/" className="hover:underline">
                     Terms &amp; Conditions
                   </a>
                 </li>
@@ -77,7 +69,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{" "}
-            <a href="https://eShop.com/" className="hover:underline">
+            <a href="h/" className="hover:underline">
               eShop™
             </a>
             . All Rights Reserved.

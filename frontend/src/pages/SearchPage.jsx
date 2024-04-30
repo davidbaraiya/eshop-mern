@@ -84,7 +84,7 @@ const SearchPage = () => {
           </h2>
         </Heading>
         <form onSubmit={handleSubmit}>
-          <div className="flex max-w-[50%] mx-auto">
+          <div className="flex md:max-w-[50%] mx-auto">
             <input
               type="text"
               className="p-2 border focus:outline-none focus:border-2 w-full"

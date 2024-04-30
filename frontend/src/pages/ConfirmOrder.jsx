@@ -48,7 +48,7 @@ const ConfirmOrder = () => {
           <h2 title="true">Confirm Order</h2>
         </Heading>
 
-        <div className="shipping flex gap-5">
+        <div className="shipping md:flex gap-5">
           <div className="w-full">
             <div className="w-full bg-white border border-gray shadow-md p-5 mb-4">
               <h4 className="mb-3">Shipping Info</h4>
@@ -75,16 +75,16 @@ const ConfirmOrder = () => {
               {cart?.map(({ id, name, image, price, quantity }) => (
                 <div
                   key={id}
-                  className="flex items-start gap-3 mt-4 border-b border-darkGray pb-4 "
+                  className="md:flex items-start gap-3 mt-4 border-b border-darkGray pb-4 "
                 >
-                  <div className="img-wrapper max-w-[140px] w-full h-full bg-gray relative pt-[100px]">
+                  <div className="img-wrapper max-w-[80px] w-full h-full bg-gray relative pt-[100px] shrink-0">
                     <img
                       src={image}
                       alt={name}
                       className="absolute inset-0 object-contain w-full h-full"
                     />
                   </div>
-                  <div className="right-side flex items-start justify-between gap-5 w-full">
+                  <div className="right-side mt-3 md:mt-0 flex items-start justify-between gap-5 w-full">
                     <div>
                       <h5>{name}</h5>
                       <span className="text-slate-600 ">Color: red</span>
@@ -106,7 +106,7 @@ const ConfirmOrder = () => {
             </div>
           </div>
 
-          <div className="w-[35%]">
+          <div className="w-full md:w-[35%]">
             <div className="bg-white border border-gray shadow-md py-5 px-4">
               <h3>Order Summery</h3>
               <div className="mt-4">

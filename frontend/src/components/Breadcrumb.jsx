@@ -8,7 +8,7 @@ function handleClick(event) {
 
 const Breadcrumb = ({ currentPage, className = " ", color }) => {
   return (
-    <div className={`bg-theme py-10 mb-[80px]  ${className}`}>
+    <div className={`bg-theme py-10 mb-[40px] md:mb-[80px]  ${className}`}>
       <div className="container">
         <Button backButton={true} className="mb-3 btn-white">
           Go To Back

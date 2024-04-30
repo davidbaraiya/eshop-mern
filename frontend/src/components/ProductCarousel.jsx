@@ -38,44 +38,30 @@ const ProductCarousel = ({ images = [], name }) => {
         ref={(slider) => (sliderRef1 = slider)}
         nextArrow=<NextArrow />
         prevArrow=<PrevArrow />
-        infinite={false}
+        infinite={true}
         className="product-main-slider"
       >
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
+        {images?.map((image) => (
+          <div className="img-wrapper" key={image.public_id}>
+            <img src={image.url} alt="product img" />
+          </div>
+        ))}
       </Slider>
       <Slider
         asNavFor={nav1}
         ref={(slider) => (sliderRef2 = slider)}
         slidesToShow={4}
-        swipeToSlide={true}
+        swipeToSlide={false}
         focusOnSelect={true}
         arrows={false}
-        infinite={false}
+        infinite={true}
         className="product-thumb-slider"
       >
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
-        <div className="img-wrapper">
-          <img src={images[0]?.url} alt="product img" />
-        </div>
+        {images?.map((image) => (
+          <div className="img-wrapper" key={image.public_id}>
+            <img src={image.url} alt="product img" />
+          </div>
+        ))}
       </Slider>
     </div>
   );
